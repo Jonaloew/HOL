@@ -7,7 +7,15 @@ defmodule Hol.MixProject do
       version: "1.0.0",
       elixir: "~> 1.17.3",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      source_url: "https://github.com/Jonaloew/HOL",
+      docs: [
+        # The main page in the docs
+        main: "readme",
+        # favicon: "path/to/favicon.png",
+        # logo: "path/to/logo.png",
+        extras: ["README.md"]
+      ]
     ]
   end
 
