@@ -16,6 +16,7 @@ The package is currently only available via this git repository.
 - `HOL.Terms.mk_term/1`: To create a term from a variable or constant
 - `HOL.Terms.mk_appl_term/2`: To apply to terms to each other
 - `HOL.Terms.mk_abstr_term/2`: To create a lambda abstraction
+- `HOL.Data.mk_substitution/2`: To create a substitution
 - `HOL.Substitution.subst/2`: To apply a list of substitutions to a term
 - `HOL.Unification.unify/3`: To find substitutions to unify two terms
 - Use the functions in the `PrettyPrint` Module to show data in a humanly readable format
@@ -45,7 +46,7 @@ appl = mk_appl_term(abstr_zx, zc) # Makes term (z (z c))
 identity = mk_term(var_x) |> mk_abstr_term(var_x) # Makes term (1. 1)
 
 # Using substitutions
-s = substitution(fvar: var_z, term: identity) # Make substitution "z <- (1. 1)"
+s = mk_substitution(var_z, identity) # Make substitution "z <- (1. 1)"
 new_appl = subst(s, appl) # Makes term (c)
 
 # Using Unification

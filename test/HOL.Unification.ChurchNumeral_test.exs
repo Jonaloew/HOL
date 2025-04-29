@@ -49,7 +49,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(1)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(1)))
   end
 
   test "succ(x)=5", state do
@@ -70,7 +70,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(4)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(4)))
   end
 
   test "succ(x)=0", state do
@@ -107,7 +107,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(1)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(1)))
   end
 
   test "1+x=2", state do
@@ -128,7 +128,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(1)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(1)))
   end
 
   test "x+4=7", state do
@@ -149,7 +149,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(3)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(3)))
   end
 
   test "4+x=7", state do
@@ -170,7 +170,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(3)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(3)))
   end
 
   test "4+x=3", state do
@@ -207,7 +207,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(5)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(5)))
   end
 
   test "x*3=15", state do
@@ -228,7 +228,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(5)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(5)))
   end
 
   test "x*1=4", state do
@@ -249,7 +249,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(4)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(4)))
   end
 
   test "1*x=4", state do
@@ -270,7 +270,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(4)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(4)))
   end
 
   test "0*x=0", state do
@@ -329,7 +329,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(100)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(100)))
   end
 
   test "x*x=0", state do
@@ -351,7 +351,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(0)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(0)))
   end
 
   test "x*x=1", state do
@@ -372,7 +372,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(1)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(1)))
   end
 
   test "x*y=4", state do
@@ -414,7 +414,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(6)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(6)))
   end
 
   test "x*x=16", state do
@@ -435,7 +435,7 @@ defmodule HOL.Unification.ChurchNumeralTests do
     check_substitutions(input, result)
 
     s = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(s, substitution(fvar: v_x, term: mk_num(4)))
+    has_ordered_elem?(s, mk_substitution(v_x, mk_num(4)))
   end
 
   test "x*x=6", state do

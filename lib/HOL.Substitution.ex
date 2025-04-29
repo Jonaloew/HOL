@@ -12,7 +12,7 @@ defmodule HOL.Substitution do
       "(x c)"
       # Create substitution
       iex> term_y = mk_free_var_term("y", mk_type(:i, [mk_type(:i)]))
-      iex> substitution = substitution(fvar: x, term: term_y)
+      iex> substitution = mk_substitution(x, term_y)
       iex> subst(substitution, term) |> PrettyPrint.pp_term()
       "(y c)"
   """
@@ -65,7 +65,7 @@ defmodule HOL.Substitution do
       "(x c)"
       # Create substitution
       iex> term_y = mk_free_var_term("y", mk_type(:i, [mk_type(:i)]))
-      iex> substitution = substitution(fvar: x, term: term_y)
+      iex> substitution = mk_substitution(x, term_y)
       iex> subst(substitution, term) |> PrettyPrint.pp_term()
       "(y c)"
   """
@@ -98,8 +98,8 @@ defmodule HOL.Substitution do
 
       iex> x = mk_free_var("x", mk_type(:i))
       iex> y = mk_free_var("y", mk_type(:i))
-      iex> subst_list = [substitution(fvar: y, term: mk_term(x))]
-      iex> new_subst = substitution(fvar: x, term: mk_const_term("c", mk_type(:i)))
+      iex> subst_list = [mk_substitution(y, mk_term(x))]
+      iex> new_subst = mk_substitution(x, mk_const_term("c", mk_type(:i)))
       iex> add_subst(subst_list, new_subst) |> PrettyPrint.pp_subst()
       "x <- c | y <- c"
   """

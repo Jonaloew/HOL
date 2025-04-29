@@ -327,7 +327,7 @@ defmodule HOL.Unification.GeneralTests do
 
     subst = get_substitutions(Enum.at(get_solutions(result), 0))
 
-    has_ordered_elem?(subst, substitution(fvar: v_x, term: appl_gzy))
+    has_ordered_elem?(subst, mk_substitution(v_x, appl_gzy))
     check_substitutions(input, result)
   end
 
@@ -412,7 +412,7 @@ defmodule HOL.Unification.GeneralTests do
     assert_result_lengths(result, 1, 0, 1, 0)
 
     subst = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(subst, substitution(fvar: v_h, term: abstr_xy_x))
+    has_ordered_elem?(subst, mk_substitution(v_h, abstr_xy_x))
 
     check_substitutions(input, result)
   end
@@ -577,8 +577,8 @@ defmodule HOL.Unification.GeneralTests do
     assert_result_lengths(result, 1, 0, 2, 0)
 
     subst = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(subst, substitution(fvar: v_x, term: t_c))
-    has_ordered_elem?(subst, substitution(fvar: v_y, term: t_c))
+    has_ordered_elem?(subst, mk_substitution(v_x, t_c))
+    has_ordered_elem?(subst, mk_substitution(v_y, t_c))
 
     check_substitutions(input, result)
   end
@@ -599,8 +599,8 @@ defmodule HOL.Unification.GeneralTests do
     assert_result_lengths(result, 1, 0, 2, 0)
 
     subst = get_substitutions(Enum.at(get_solutions(result), 0))
-    has_ordered_elem?(subst, substitution(fvar: v_x, term: t_c))
-    has_ordered_elem?(subst, substitution(fvar: v_y, term: t_c))
+    has_ordered_elem?(subst, mk_substitution(v_x, t_c))
+    has_ordered_elem?(subst, mk_substitution(v_y, t_c))
 
     check_substitutions(input, result)
   end

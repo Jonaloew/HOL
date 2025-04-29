@@ -320,6 +320,12 @@ defmodule HOL.Data do
           )
 
   @doc """
+  Creates a new substitution
+  """
+  @spec mk_substitution(free_var_decl(), hol_term()) :: substitution()
+  def mk_substitution(fvar, term), do: substitution(fvar: fvar, term: term)
+
+  @doc """
   Accessor function for the free variable of the substitution
   """
   @spec get_fvar(substitution()) :: free_var_decl()

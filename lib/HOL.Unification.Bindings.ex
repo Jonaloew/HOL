@@ -73,7 +73,7 @@ defmodule HOL.Unification.Bindings do
     results =
       Enum.map(
         bindings_right_side,
-        fn binding -> substitution(fvar: left_head, term: binding) end
+        fn binding -> mk_substitution(left_head, binding) end
       )
 
     log_output(log_level(), fn -> "Generic Binding Output: {" <> pp_subst(results) <> "}" end)

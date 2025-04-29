@@ -38,7 +38,7 @@ defmodule HOL.Substitution.Tests do
     v_y = mk_free_var("y", state[:i])
     t_y = mk_term(v_y)
 
-    subst = [substitution(fvar: v_x, term: t_y)]
+    subst = [mk_substitution(v_x, t_y)]
 
     result = subst(subst, t_x)
     assert result == t_y
@@ -53,7 +53,7 @@ defmodule HOL.Substitution.Tests do
     t_f = mk_term(c_f)
     appl_fy = mk_appl_term(t_f, t_y)
 
-    subst = [substitution(fvar: v_x, term: appl_fy)]
+    subst = [mk_substitution(v_x, appl_fy)]
 
     result = subst(subst, t_x)
     assert result == appl_fy
@@ -69,7 +69,7 @@ defmodule HOL.Substitution.Tests do
     appl_fx = mk_appl_term(t_f, t_x)
     appl_fy = mk_appl_term(t_f, t_y)
 
-    subst = [substitution(fvar: v_x, term: t_y)]
+    subst = [mk_substitution(v_x, t_y)]
 
     result = subst(subst, appl_fx)
     assert result == appl_fy
@@ -85,7 +85,7 @@ defmodule HOL.Substitution.Tests do
     appl_fx = mk_appl_term(t_f, t_x)
     appl_fy = mk_appl_term(t_f, t_y)
 
-    subst = [substitution(fvar: v_x, term: appl_fy)]
+    subst = [mk_substitution(v_x, appl_fy)]
 
     result = subst(subst, appl_fx)
     assert result == mk_appl_term(t_f, appl_fy)
@@ -102,7 +102,7 @@ defmodule HOL.Substitution.Tests do
     t_g = mk_term(c_g)
     appl_gzy = t_g |> mk_appl_term(t_z) |> mk_appl_term(t_y)
 
-    subst = [substitution(fvar: v_z, term: t_f)]
+    subst = [mk_substitution(v_z, t_f)]
 
     result = subst(subst, appl_gzy)
     assert result == mk_appl_term(t_g, t_f) |> mk_appl_term(t_y)
@@ -116,8 +116,8 @@ defmodule HOL.Substitution.Tests do
     c_f = mk_const("f", state[:ii])
     t_f = mk_term(c_f)
 
-    substs = [substitution(fvar: v_z, term: t_f)]
-    new_subst = substitution(fvar: v_x, term: t_y)
+    substs = [mk_substitution(v_z, t_f)]
+    new_subst = mk_substitution(v_x, t_y)
 
     result = add_subst(substs, new_subst)
     assert new_subst in result
@@ -131,12 +131,12 @@ defmodule HOL.Substitution.Tests do
     c_c = mk_const("c", state[:i])
     t_c = mk_term(c_c)
 
-    substs = [substitution(fvar: v_x, term: t_y)]
-    new_subst = substitution(fvar: v_y, term: t_c)
+    substs = [mk_substitution(v_x, t_y)]
+    new_subst = mk_substitution(v_y, t_c)
 
     result = add_subst(substs, new_subst)
     assert new_subst in result
-    assert substitution(fvar: v_x, term: t_c) in result
+    assert mk_substitution(v_x, t_c) in result
   end
 
   test "add_subst_2", state do
@@ -146,11 +146,11 @@ defmodule HOL.Substitution.Tests do
     helper_var = mk_uniqe_var(state[:i])
     helper_term = mk_term(helper_var)
 
-    substs = [substitution(fvar: v_x, term: helper_term)]
-    new_subst = substitution(fvar: helper_var, term: t_c)
+    substs = [mk_substitution(v_x, helper_term)]
+    new_subst = mk_substitution(helper_var, t_c)
 
     result = add_subst(substs, new_subst)
-    assert result == [substitution(fvar: v_x, term: t_c)]
+    assert result == [mk_substitution(v_x, t_c)]
   end
 
   test "add_subst_3", state do
@@ -163,15 +163,15 @@ defmodule HOL.Substitution.Tests do
     c_f = mk_const("f", state[:ii])
     t_f = mk_term(c_f)
 
-    substs = [substitution(fvar: v_x, term: t_y)]
+    substs = [mk_substitution(v_x, t_y)]
 
-    new_subst_a = substitution(fvar: v_z, term: t_f)
-    new_subst_b = substitution(fvar: v_y, term: t_c)
+    new_subst_a = mk_substitution(v_z, t_f)
+    new_subst_b = mk_substitution(v_y, t_c)
 
     result = add_subst(add_subst(substs, new_subst_a), new_subst_b)
     assert new_subst_a in result
     assert new_subst_b in result
-    assert substitution(fvar: v_x, term: t_c) in result
+    assert mk_substitution(v_x, t_c) in result
   end
 
   test "add_subst_4", state do
@@ -186,14 +186,14 @@ defmodule HOL.Substitution.Tests do
     t_f = mk_term(c_f)
     appl_fx = mk_appl_term(t_f, t_x)
 
-    substs = [substitution(fvar: v_x, term: t_y)]
+    substs = [mk_substitution(v_x, t_y)]
 
-    new_subst_a = substitution(fvar: v_w, term: appl_fx)
-    new_subst_b = substitution(fvar: v_y, term: t_c)
+    new_subst_a = mk_substitution(v_w, appl_fx)
+    new_subst_b = mk_substitution(v_y, t_c)
 
     result = add_subst(add_subst(substs, new_subst_a), new_subst_b)
     assert new_subst_a in result
     assert new_subst_b in result
-    assert substitution(fvar: v_x, term: t_c) in result
+    assert mk_substitution(v_x, t_c) in result
   end
 end

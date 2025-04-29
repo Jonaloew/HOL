@@ -354,7 +354,7 @@ defmodule HOL.Unification do
     else
       {new_terms, new_subst, new_flex} =
         add_new_substitution(
-          substitution(fvar: var, term: term),
+          mk_substitution(var, term),
           subst,
           rest_list,
           flex
