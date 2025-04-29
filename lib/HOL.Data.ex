@@ -4,6 +4,7 @@ defmodule HOL.Data do
   """
   require Record
 
+  @doc group: :Type
   @doc """
   Creates a new type. This function should not need be called under normal usage of this Package
 
@@ -33,18 +34,21 @@ defmodule HOL.Data do
   """
   @type type() :: record(:type, goal: atom(), args: [type()])
 
+  @doc group: :Type
   @doc """
   Accessor function for goal type
   """
   @spec get_goal_type(type()) :: atom()
   def get_goal_type(t), do: type(t, :goal)
 
+  @doc group: :Type
   @doc """
   Accessor function for argument types
   """
   @spec get_arg_types(type()) :: [type()]
   def get_arg_types(t), do: type(t, :args)
 
+  @doc group: :Type
   @doc """
   Creates a base type without arguments.
 
@@ -61,6 +65,7 @@ defmodule HOL.Data do
   @spec mk_type(atom()) :: type()
   def mk_type(goal_type) when is_atom(goal_type), do: mk_type(goal_type, [])
 
+  @doc group: :Type
   @doc """
   Creates a type with the given arguments.
 
@@ -99,6 +104,7 @@ defmodule HOL.Data do
   end
 
   # Declaration
+  @doc group: :Declaration
   @doc """
   Creates a new declaration. This function should not need be called under normal usage of this Package
 
@@ -137,6 +143,7 @@ defmodule HOL.Data do
   """
   @type bound_var_decl() :: {:decl, :bv, pos_integer(), type()}
 
+  @doc group: :Declaration
   @doc """
   Accessor function for type of declaration.
 
@@ -148,18 +155,21 @@ defmodule HOL.Data do
   @spec get_kind(declaration()) :: :fv | :bv | :co
   def get_kind(declaration(kind: kind)), do: kind
 
+  @doc group: :Declaration
   @doc """
   Accessor function for the identifier
   """
   @spec get_name(declaration()) :: String.t() | pos_integer() | reference()
   def get_name(declaration(name: name)), do: name
 
+  @doc group: :Declaration
   @doc """
   Accessor function for the type
   """
   @spec get_type(declaration()) :: type()
   def get_type(declaration(type: type)), do: type
 
+  @doc group: :Declaration
   # Constructor functions
   @doc """
   Creates a free variable with the given name and type.
@@ -175,6 +185,7 @@ defmodule HOL.Data do
   def mk_free_var(name, type) when is_binary(name) or is_reference(name),
     do: declaration(kind: :fv, name: name, type: type)
 
+  @doc group: :Declaration
   @doc """
   Creates a bound variable with the given id and type.
 
@@ -189,6 +200,7 @@ defmodule HOL.Data do
   def mk_bound_var(nat, type) when is_integer(nat) and nat >= 0,
     do: declaration(kind: :bv, name: nat, type: type)
 
+  @doc group: :Declaration
   @doc """
   Creates a constant with the given name and type.
 
@@ -201,6 +213,7 @@ defmodule HOL.Data do
   def mk_const(id, type) when is_binary(id),
     do: declaration(kind: :co, name: id, type: type)
 
+  @doc group: :Declaration
   @doc """
   Creates a free variable with a unique name and type.
 
@@ -213,6 +226,7 @@ defmodule HOL.Data do
     do: declaration(kind: :fv, name: make_ref(), type: type)
 
   # Terms
+  @doc group: :Term
   @doc """
   Creates a new term.
 
@@ -256,36 +270,42 @@ defmodule HOL.Data do
           )
 
   # Term Accessor functions
+  @doc group: :Term
   @doc """
   Accessor function for the bound variables of the term
   """
   @spec get_bvars(hol_term()) :: [bound_var_decl()]
   def get_bvars(hol_term(bvars: bvars)), do: bvars
 
+  @doc group: :Term
   @doc """
   Accessor function for head of the term
   """
   @spec get_head(hol_term()) :: declaration()
   def get_head(hol_term(head: head)), do: head
 
+  @doc group: :Term
   @doc """
   Accessor function for the arguments of the term
   """
   @spec get_args(hol_term()) :: [hol_term()]
   def get_args(hol_term(args: args)), do: args
 
+  @doc group: :Term
   @doc """
   Accessor function for the type of the term
   """
   @spec get_term_type(hol_term()) :: type()
   def get_term_type(hol_term(type: type)), do: type
 
+  @doc group: :Term
   @doc """
   Accessor function for the free variables in the term
   """
   @spec get_fvars(hol_term()) :: [free_var_decl()]
   def get_fvars(hol_term(fvars: fvars)), do: fvars
 
+  @doc group: :Term
   @doc """
   Accessor function for the max_num of the term
   """
@@ -293,6 +313,7 @@ defmodule HOL.Data do
   def get_max_num(hol_term(max_num: max_num)), do: max_num
 
   # Substitution
+  @doc group: :Substitution
   @doc """
   Creates a new substitution.
 
@@ -319,18 +340,21 @@ defmodule HOL.Data do
             term: hol_term()
           )
 
+  @doc group: :Substitution
   @doc """
   Creates a new substitution
   """
   @spec mk_substitution(free_var_decl(), hol_term()) :: substitution()
   def mk_substitution(fvar, term), do: substitution(fvar: fvar, term: term)
 
+  @doc group: :Substitution
   @doc """
   Accessor function for the free variable of the substitution
   """
   @spec get_fvar(substitution()) :: free_var_decl()
   def get_fvar(substitution(fvar: fvar)), do: fvar
 
+  @doc group: :Substitution
   @doc """
   Accessor function for the term of the substitution
   """
