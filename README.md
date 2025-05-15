@@ -33,16 +33,18 @@ Documentation is available on [hexdocs](https://hexdocs.pm/hol/readme.html)
 - `HOL.Unification.unify/3`: To find substitutions to unify two terms
 - Use the functions in the `PrettyPrint` Module to show data in a humanly readable format
 
+## Unification Examples
+
+The following and more examples can be found interactively in the [livebook](https://hexdocs.pm/hol/unification_examples.html).
+
+Setup for Tests:
+
 ```elixir
 type_i = mk_type(:i)
 type_ii = mk_type(type_i, [type_i])
 type_ii_ii = mk_type(type_ii, [type_ii])
 type_iii = mk_type(type_i, [type_i, type_i])
 ```
-
-## Unification Examples
-
-The following and more examples can be found interactively in the [livebook](https://hexdocs.pm/hol/unification_examples.html).
 
 ### Example: x \* 10 = 1000
 
