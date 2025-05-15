@@ -2,20 +2,23 @@
 
 This elixir package gives an implementation of higher order logic via the [simply typed lambda calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus) and higher order pre-[unification](https://en.wikipedia.org/wiki/Unification_%28computer_science%29#Higher-order_unification). All lambda terms are always automatically beta-reduced and eta-expanded. Bound Variables are automatically named via [de bruijn indices](https://en.wikipedia.org/wiki/De_Bruijn_index).
 
-Documentation can be build via command `mix docs` and opened via `mix docs --open` after downloading the repository.
+This package was developed at [University of Bamberg](https://www.uni-bamberg.de/en/) with the [AISE Chair](https://www.uni-bamberg.de/en/aise/).
 
 ## Installation
 
-The package is currently only available via this git repository. It can be installed
-by adding `hol` to your list of dependencies in `mix.exs`:
+This package can be installed by adding `hol` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:hol, git: "https://github.com/Jonaloew/HOL.git"}
+    {:hol, "1.0.1"}
   ]
 end
 ```
+
+## Documentation
+
+Documentation is available on [hexdocs](readme.html)
 
 ## Most important functions
 

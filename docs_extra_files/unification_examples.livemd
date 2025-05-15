@@ -1,7 +1,7 @@
 # Unification Examples
 
 ```elixir
-Mix.install([{:hol, git: "https://github.com/Jonaloew/HOL.git"}])
+Mix.install([{:hol, "1.0.1"}])
 ```
 
 ## Setup

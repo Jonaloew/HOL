@@ -1,6 +1,8 @@
 defmodule Hol.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/Jonaloew/HOL"
+
   def project do
     [
       app: :hol,
@@ -8,14 +10,15 @@ defmodule Hol.MixProject do
       elixir: "~> 1.17.3",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      source_url: "https://github.com/Jonaloew/HOL",
+      source_url: @source_url,
       docs: [
-        # The main page in the docs
         main: "readme",
         # favicon: "path/to/favicon.png",
         # logo: "path/to/logo.png",
         extras: ["README.md", "docs_extra_files/unification_examples.livemd"]
-      ]
+      ],
+      description: "A higher order logic pre-unification implementation",
+      package: package()
     ]
   end
 
@@ -37,6 +40,17 @@ defmodule Hol.MixProject do
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       # Documentation
       {:ex_doc, "~> 0.21", only: :dev, runtime: false}
+    ]
+  end
+
+  def package do
+    [
+      licenses: ["Apache-2.0"],
+      maintainers: ["Jonathan Löw"],
+      files: ~w(config docs_extra_files lib test LICENSE mix.exs README.md),
+      links: %{
+        "GitHub" => @source_url
+      }
     ]
   end
 end
