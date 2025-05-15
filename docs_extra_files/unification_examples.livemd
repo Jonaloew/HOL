@@ -1,10 +1,10 @@
 # Unification Examples
 
-## Setup
-
 ```elixir
 Mix.install([{:hol, git: "https://github.com/Jonaloew/HOL.git"}])
 ```
+
+## Setup
 
 ```elixir
 import HOL.Data
@@ -25,7 +25,7 @@ type_ii_ii = mk_type(type_ii, [type_ii])
 type_iii = mk_type(type_i, [type_i, type_i])
 ```
 
-### Example: x \* 5 = 30
+## Example: x \* 5 = 30
 
 ```elixir
 t_x = mk_free_var_term("x", type_ii_ii)
@@ -41,9 +41,26 @@ This finds one substitution that replaces `x` with the church numeral `6`
 
 x = 6: `x <- λ 2 1. 2 (2 (2 (2 (2 (2 1)))))`
 
-<!-- livebook:{"break_markdown":true} -->
+## Example: x \* 10 = 1000
 
-### Example: x \* y = 4
+```elixir
+t_x = mk_free_var_term("x", type_ii_ii)
+
+x_times_10 = mult_term() |> mk_appl_term(t_x) |> mk_appl_term(mk_num(10))
+
+input = [
+  {x_times_10, mk_num(1000)}
+]
+
+result = unify(input, true, 1000)
+pp_res(result, true)
+```
+
+This finds one substitution that replaces `x` with the church numeral `100`
+
+x = 100: `x <- (2 1. 2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 (2 1) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) )`
+
+## Example: x \* y = 4
 
 ```elixir
 t_x = mk_free_var_term("x", type_ii_ii)
@@ -66,9 +83,7 @@ y = 2, x = 2: `y <- λ 2 1. 2 (2 1)` | `x <- λ 2 1. 2 (2 1)`
 
 y = 4, x = 1: `y <- λ 2 1. 2 (2 (2 (2 1)))` | `x <- λ 2 1. 2 1`
 
-<!-- livebook:{"break_markdown":true} -->
-
-### Example: xaa = faa
+## Example: xaa = faa
 
 ```elixir
 t_x = mk_free_var_term("x", type_iii)
@@ -104,9 +119,7 @@ Finds nine possible substitutions for unification:
 
 `x <- λ 2 1. f a a`
 
-<!-- livebook:{"break_markdown":true} -->
-
-### Example: x(fa) = f(xa)
+## Example: x(fa) = f(xa)
 
 ```elixir
 t_x = mk_free_var_term("x", type_ii)
@@ -135,15 +148,11 @@ This finds four solutions:
 
 However the maximum search depth was also reached twice. This means that it might not have found all solutions. Try changing the `depth` value and see what other solutions can be found!
 
-<!-- livebook:{"break_markdown":true} -->
+## Example: Multiple Equations
 
-### Example: Multiple Equations
-
-#### xy+z=21
-
-#### x+y+z=10
-
-#### xz+y=9
+- xy+z=21
+- x+y+z=10
+- xz+y=9
 
 ```elixir
 t_x = mk_free_var_term("x", type_ii_ii)
@@ -169,9 +178,7 @@ z = 1, y = 5, x = 4: `z <- λ 2 1. 2 1` | `y <- λ 2 1. 2 (2 (2 (2 (2 1))))` | `
 
 Once again the maximum search depth was reached multiple times. However increasing the search depth will not yield more solutions here. Unification doesn't always terminate even when no more solutions can be found!
 
-<!-- livebook:{"break_markdown":true} -->
-
-### Example: x = zc
+## Example: x = zc
 
 ```elixir
 t_x = mk_free_var_term("x", type_i)
