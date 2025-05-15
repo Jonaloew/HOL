@@ -22,7 +22,7 @@ defmodule HOL.Unification do
   @doc """
   This function tries to unify a set of terms with each other.
 
-  Returns a `HOL.Data.Unification.unification_results/0`object that contains the
+  Returns a `HOL.Data.Unification.unification_results/0` object that contains the
   summarized results.
 
   ## Parameters

@@ -14,7 +14,7 @@ defmodule Hol.MixProject do
         main: "readme",
         # favicon: "path/to/favicon.png",
         # logo: "path/to/logo.png",
-        extras: ["README.md"]
+        extras: ["README.md", "docs_extra_files/unification_examples.livemd"]
       ]
     ]
   end

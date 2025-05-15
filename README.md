@@ -1,12 +1,53 @@
 # HOL
 
-This elixir package gives an implementation of higher order logic via the simply typed lambda calculus and higher order logic unification. All lambda terms are always automatically beta-reduced and eta-expanded. Bound Variables are automatically named via de bruijn indices.
+This elixir package gives an implementation of higher order logic via the [simply typed lambda calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus) and higher order pre-[unification](https://en.wikipedia.org/wiki/Unification_%28computer_science%29#Higher-order_unification). All lambda terms are always automatically beta-reduced and eta-expanded. Bound Variables are automatically named via [de bruijn indices](https://en.wikipedia.org/wiki/De_Bruijn_index).
 
 Documentation can be build via command `mix docs` and opened via `mix docs --open` after downloading the repository.
 
 ## Installation
 
-The package is currently only available via this git repository.
+The package is currently only available via this git repository. It can be installed
+by adding `hol` to your list of dependencies in `mix.exs`:
+
+```elixir
+def deps do
+  [
+    {:hol, git: "https://github.com/Jonaloew/HOL.git"}
+  ]
+end
+```
+
+## Example: x(fa) = f(xa)
+
+```elixir
+type_i = mk_type(:i)
+type_ii = mk_type(type_i, [type_i])
+
+t_x = mk_free_var_term("x", type_ii)
+t_f = mk_const_term("f", type_ii)
+t_a = mk_const_term("a", type_i)
+
+xfa = mk_appl_term(t_x, mk_appl_term(t_f, t_a))
+fxa = mk_appl_term(t_f, mk_appl_term(t_x, t_a))
+
+depth = 5
+input = {xfa, fxa}
+
+result = unify(input, true, depth)
+pp_res(result)
+```
+
+This finds four solutions:
+
+`x <- λ 1. 1 `
+
+`x <- λ 1. f 1`
+
+`x <- λ 1. f (f 1)`
+
+`x <- λ 1. f (f (f 1))`
+
+However the maximum search depth was also reached twice. This means that it might not have found all solutions. A larger depth value can find more solutions
 
 ## Most important functions
 
@@ -20,35 +61,3 @@ The package is currently only available via this git repository.
 - `HOL.Substitution.subst/2`: To apply a list of substitutions to a term
 - `HOL.Unification.unify/3`: To find substitutions to unify two terms
 - Use the functions in the `PrettyPrint` Module to show data in a humanly readable format
-
-## Example
-
-```elixir
-# Creating types
-type_i = mk_type(:i) # Creates base type i
-type_ii = mk_type(:i, [type_i]) # Creates type i->i
-type_o = mk_type(:o) # Creates base type o
-
-# Creating Vars
-var_x = mk_free_var("x", type_i)
-var_z = mk_free_var("z", type_ii)
-con_c = mk_const("c", type_i)
-
-# Using Terms
-term_c = mk_term(con_c) # Makes term (c)
-term_z = mk_term(var_z) # Makes term (1. z 1) because of eta-expansion
-zx = mk_appl_term(term_z, mk_term(var_x)) # Makes term (z x)
-zc = mk_appl_term(term_z, term_c) # Makes term (z c)
-
-abstr_zx = mk_abstr_term(zc, var_x) # Makes term (1. z 1)
-appl = mk_appl_term(abstr_zx, zc) # Makes term (z (z c))
-
-identity = mk_term(var_x) |> mk_abstr_term(var_x) # Makes term (1. 1)
-
-# Using substitutions
-s = mk_substitution(var_z, identity) # Make substitution "z <- (1. 1)"
-new_appl = subst(s, appl) # Makes term (c)
-
-# Using Unification
-result = unify({mk_term(var_x), term_c}) # Gives one solution with the substitution "x <- c"
-```
