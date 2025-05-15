@@ -18,7 +18,7 @@ end
 
 ## Documentation
 
-Documentation is available on [hexdocs](readme.html)
+Documentation is available on [hexdocs](https://hexdocs.pm/hol/readme.html)
 
 ## Most important functions
 
@@ -42,7 +42,7 @@ type_iii = mk_type(type_i, [type_i, type_i])
 
 ## Unification Examples
 
-The following and more examples can be found interactively in the [livebook](unification_examples.livemd).
+The following and more examples can be found interactively in the [livebook](https://hexdocs.pm/hol/unification_examples.html).
 
 ### Example: x \* 10 = 1000
 
