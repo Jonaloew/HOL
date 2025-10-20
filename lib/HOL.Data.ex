@@ -218,7 +218,7 @@ defmodule HOL.Data do
   Creates a free variable with a unique name and type.
 
   The tag parameter is an atom, that is intended to be used to show where a uniqe free variable was created.
-  For example this could be used in function `HOL.Substitution.add_subst\3` to prevent
+  For example this could be used in function `HOL.Substitution.add_subst/3` to prevent
   unnecessary helper variables from being added to the list of substitutions.
 
   The name is created via the function `Kernel.make_ref/0`. See the corresponding documentation for the limitations of this function.
