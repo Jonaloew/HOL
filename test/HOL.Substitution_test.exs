@@ -143,13 +143,13 @@ defmodule HOL.Substitution.Tests do
     v_x = mk_free_var("x", state[:i])
     c_c = mk_const("c", state[:i])
     t_c = mk_term(c_c)
-    helper_var = mk_uniqe_var(state[:i])
+    helper_var = mk_uniqe_var(state[:i], :test_var)
     helper_term = mk_term(helper_var)
 
     substs = [mk_substitution(v_x, helper_term)]
     new_subst = mk_substitution(helper_var, t_c)
 
-    result = add_subst(substs, new_subst)
+    result = add_subst(substs, new_subst, [:test_var])
     assert result == [mk_substitution(v_x, t_c)]
   end
 

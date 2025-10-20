@@ -91,8 +91,8 @@ defmodule HOL.Substitution do
   Adds a single substitution to a list of substitutions.
   The new substitution is applied to all terms in the other substitutions, keeping the list idempotent.
 
-  Substitutions using free variables with references as names are not added to the list,
-  but still apply their substitution to the terms.
+  Substitutions using unique free variables with a tag that is in fvar_tags_not_add
+  are not added to the list, but still apply their substitution to the terms.
 
   ## Example
 
@@ -103,8 +103,11 @@ defmodule HOL.Substitution do
       iex> add_subst(subst_list, new_subst) |> PrettyPrint.pp_subst()
       "x <- c | y <- c"
   """
-  @spec add_subst([HOL.Data.substitution()], HOL.Data.substitution()) :: [HOL.Data.substitution()]
-  def add_subst(substs, new_subst) do
+  @spec add_subst([HOL.Data.substitution()], HOL.Data.substitution(), [atom()]) ::
+          [HOL.Data.substitution()]
+  @spec add_subst([HOL.Data.substitution()], HOL.Data.substitution()) ::
+          [HOL.Data.substitution()]
+  def add_subst(substs, new_subst, fvar_tags_not_add \\ []) do
     log_input(log_level(), fn ->
       "Input add_subst: " <> pp_subst(substs) <> " and " <> pp_subst(new_subst)
     end)
@@ -118,7 +121,7 @@ defmodule HOL.Substitution do
     declaration(kind: :fv, name: name) = get_fvar(new_subst)
 
     result =
-      if is_reference(name) do
+      if is_tuple(name) and elem(name, 1) in fvar_tags_not_add do
         applied
       else
         [new_subst | applied]

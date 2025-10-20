@@ -11,7 +11,7 @@ This package can be installed by adding `hol` to your list of dependencies in `m
 ```elixir
 def deps do
   [
-    {:hol, "1.0.1"}
+    {:hol, "1.0.2"}
   ]
 end
 ```

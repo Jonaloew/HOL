@@ -51,7 +51,7 @@ defmodule HOL.Unification.Bindings do
       else
         0..(left_arity - 1)
       end
-      |> Enum.map(fn n -> mk_uniqe_var(Enum.at(left_inputs, n)) end)
+      |> Enum.map(fn n -> mk_uniqe_var(Enum.at(left_inputs, n), :hol_unification) end)
 
     x_vars_terms = Enum.map(x_vars, &mk_term(&1))
 
@@ -99,7 +99,7 @@ defmodule HOL.Unification.Bindings do
         0..(to_use_arity - 1)
       end
       |> Enum.map(fn n ->
-        mk_term(mk_uniqe_var(mk_type(Enum.at(to_use_inputs, n), left_inputs)))
+        mk_term(mk_uniqe_var(mk_type(Enum.at(to_use_inputs, n), left_inputs), :hol_unification))
       end)
 
     # Apply x_vars to all h_vars

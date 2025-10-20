@@ -437,7 +437,7 @@ defmodule HOL.Unification do
           [HOL.Data.Unification.term_pair()]
         }
   defp add_new_substitution(new_subst_pair, old_subst_list, term_list, flex_list) do
-    new_subst = add_subst(old_subst_list, new_subst_pair)
+    new_subst = add_subst(old_subst_list, new_subst_pair, [:hol_unification])
 
     {new_flex, additional_terms} =
       Enum.reduce(flex_list, {[], []}, fn {left, right}, {acc_same, acc_to_terms} ->

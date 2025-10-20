@@ -127,7 +127,7 @@ defmodule HOL.Data do
 
   The name can be either a string or a reference.
   """
-  @type free_var_decl() :: {:decl, :fv, String.t() | reference(), type()}
+  @type free_var_decl() :: {:decl, :fv, String.t() | {reference(), atom()}, type()}
 
   @typedoc """
   Represents a constant.
@@ -217,13 +217,18 @@ defmodule HOL.Data do
   @doc """
   Creates a free variable with a unique name and type.
 
+  The tag parameter is an atom, that is intended to be used to show where a uniqe free variable was created.
+  For example this could be used in function `HOL.Substitution.add_subst\3` to prevent
+  unnecessary helper variables from being added to the list of substitutions.
+
   The name is created via the function `Kernel.make_ref/0`. See the corresponding documentation for the limitations of this function.
 
   Also see function `mk_free_var/2` for creating a named free variable
   """
   @spec mk_uniqe_var(type()) :: free_var_decl()
-  def mk_uniqe_var(type),
-    do: declaration(kind: :fv, name: make_ref(), type: type)
+  @spec mk_uniqe_var(type(), atom()) :: free_var_decl()
+  def mk_uniqe_var(type, tag \\ :none),
+    do: declaration(kind: :fv, name: {make_ref(), tag}, type: type)
 
   # Terms
   @doc group: :Term

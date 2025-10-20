@@ -20,8 +20,9 @@ defmodule PrettyPrint do
   @spec pp_decl(HOL.Data.declaration(), boolean()) :: String.t()
   def pp_decl(declaration(name: name, type: type), short \\ true) do
     pp_name =
-      if is_reference(name) do
-        "<" <> String.slice(Kernel.inspect(name), 35, 99)
+      if is_tuple(name) do
+        {ref, tag} = name
+        "<" <> String.slice(Kernel.inspect(ref), 35, 99) <> "_" <> Kernel.inspect(tag)
       else
         to_string(name)
       end
